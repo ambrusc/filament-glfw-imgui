@@ -1,3 +1,7 @@
+This is a header-only library and sample code for using Filament with GLFW and ImGui.
+
+![screenshot](screenshot.png "Screenshot")
+
 ### Building and Running
 ```
 git clone https://github.com/google/filament.git && \
