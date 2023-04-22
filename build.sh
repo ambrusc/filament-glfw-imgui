@@ -77,7 +77,7 @@ if [[ "$1" = "deps" ]]; then
     cmake --build . --config $CONFIG --parallel) && \
     cmake --install $GLFW_SRC/build --prefix $GLFW_PATH --config $CONFIG"
 
-  eval $BUILD_FILAMENT && eval $BUILD_GLFW
+  (eval $BUILD_FILAMENT && eval $BUILD_GLFW)
 
 #-------------------------------------------------------------------------------
 # Builds resources (e.g. materials)

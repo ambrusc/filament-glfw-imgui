@@ -5,7 +5,7 @@ This is a header-only library and sample code for using Filament with GLFW and I
 ### Building and Running
 ```
 git clone https://github.com/google/filament.git && \
-  (cd filament && git checkout tags/v1.32.1)
+  (cd filament && git checkout tags/v1.32.4)
 git clone https://github.com/glfw/glfw.git && \
   (cd glfw && git checkout tags/3.3.8)
 git clone https://github.com/ambrusc/filament-glfw-imgui.git && \
@@ -15,6 +15,15 @@ git clone https://github.com/ambrusc/filament-glfw-imgui.git && \
   ./build.sh demo && \
     (cd build && ./demo)
 ```
+
+> NOTE: if you get an error like:
+```
+filament/third_party/spirv-cross/tnt/../spirv_common.hpp:665:19: error: unqualified call to 'std::move' [-Werror,-Wunqualified-std-cast-call]
+            : expression(move(expr))
+                         ^
+                         std::
+```
+Call `./build.sh deps && ./build.sh resources && ./build.sh demo && (cd build && ./demo)` and it may just succeed the second time.
 
 ### Tested Platforms
 - MacOS, x86-64, Filament backend Metal
@@ -41,7 +50,7 @@ Everything in __filament_glfw_imgui__ strives to be as modular as possible. It's
   - [#5242](https://github.com/google/filament/issues/5242) I'm not the only one with issues on linux.
   - GLFW also claims to be [lighter weight than SDL](https://www.glfw.org/faq.html#13---why-yet-another-opengl-library) and I've had good luck with it in the past.
 - But [such-and-such] already did this. Why not use theirs?
-  - Here are some [alternatives](#-alternatives) I found, which may be useful to you. If you know of any more, I'm open to linking those as well.
+  - Here are some [alternatives](#alternatives) I found, which may be useful to you. If you know of any more, I'm open to linking those as well.
 - Because it was a challenge and I felt like doing it :-)
 
 ### Known (or Suspected) Issues
@@ -51,7 +60,7 @@ Everything in __filament_glfw_imgui__ strives to be as modular as possible. It's
   - [#6675](https://github.com/google/filament/issues/6675): "The sample schedules frames badly using a fixed timestep of ~16ms, it doesn't try to use vsync at all."
   - [#4337](https://github.com/google/filament/issues/4337): You can force Vsync on/off in your video driver.
   - [#636](https://github.com/google/filament/issues/636): Claims that Vsync callbacks were added but newer issues (above) seem to indicate otherwise.
-- Few platforms tested: see [Tested Platforms](#-tested-platforms) above
+- Few platforms tested: see [Tested Platforms](tested-platforms) above
 - I haven't tested Wayland and it probably would require a new implementation of `filament_native_...cpp`.
 - filament_imgui only supports 65535 vertices total. This is fixable, I just haven't done it yet.
 
