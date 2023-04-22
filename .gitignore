@@ -1,0 +1,12 @@
+*.o
+*.dylib
+**/*.DS_Store
+**/*.DSYM
+**/resources.bin
+**/resources.h
+**/resources.S
+**/resources.apple.S
+3p/precompiled/**/*
+!3p/precompiled/README.md
+build/**/*
+!build/README.md

@@ -1,0 +1,16 @@
+material {
+    name : lit_vertex_color,
+    requires : [
+        color
+    ],
+    shadingModel : lit,
+}
+
+fragment {
+    void material(inout MaterialInputs material) {
+        prepareMaterial(material);
+        material.baseColor = getColor();
+        material.metallic = 0.1;
+        material.roughness = 0.1;
+    }
+}

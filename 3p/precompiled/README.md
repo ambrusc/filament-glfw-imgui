@@ -1,0 +1,1 @@
+This folder starts out empty. Calling "build.sh deps" installs compiled libraries here.
