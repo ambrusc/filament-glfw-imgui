@@ -87,7 +87,7 @@ elif [[ "$1" = "resources" ]]; then
   # Copy environments to the output folder. These aren't compiled as resources
   # but are loaded at runtime. Then, build all materials and bundle them, as
   # well as fonts for the demo. The -a option may be overkill for your platform.
-  mkdir -p $OUT/environments && cp -r demo/environments $OUT/environments && \
+  mkdir -p $OUT && cp -r demo/environments $OUT && \
   $FILAMENT_BIN/matc -p all -a all -o \
     $OUT/vertex_color.filamat demo/materials/vertex_color.mat && \
   $FILAMENT_BIN/matc -p all -a all -o \
