@@ -16,18 +16,11 @@ git clone https://github.com/ambrusc/filament-glfw-imgui.git && \
     (cd build && ./demo)
 ```
 
-> NOTE: if you get an error like:
-```
-filament/third_party/spirv-cross/tnt/../spirv_common.hpp:665:19: error: unqualified call to 'std::move' [-Werror,-Wunqualified-std-cast-call]
-            : expression(move(expr))
-                         ^
-                         std::
-```
-Call `./build.sh deps && ./build.sh resources && ./build.sh demo && (cd build && ./demo)` and it may just succeed the second time.
-
 ### Tested Platforms
 - MacOS, x86-64, Filament backend Metal
 - Linux: Manjaro, x86-64, Filament backend OpenGL and Vulkan, X11
+
+> NOTE: I think this code *should* build with MSYS2/mingw64 on Windows, but I haven't tested yet.
 
 ### Principles
 The code strives to be concise and readable (reading the code, including build.sh is encouraged). 
@@ -60,7 +53,7 @@ Everything in __filament_glfw_imgui__ strives to be as modular as possible. It's
   - [#6675](https://github.com/google/filament/issues/6675): "The sample schedules frames badly using a fixed timestep of ~16ms, it doesn't try to use vsync at all."
   - [#4337](https://github.com/google/filament/issues/4337): You can force Vsync on/off in your video driver.
   - [#636](https://github.com/google/filament/issues/636): Claims that Vsync callbacks were added but newer issues (above) seem to indicate otherwise.
-- Few platforms tested: see [Tested Platforms](tested-platforms) above
+- Few platforms tested: see [Tested Platforms](#tested-platforms) above
 - I haven't tested Wayland and it probably would require a new implementation of `filament_native_...cpp`.
 - filament_imgui only supports 65535 vertices total. This is fixable, I just haven't done it yet.
 

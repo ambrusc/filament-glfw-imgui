@@ -77,13 +77,17 @@ if [[ "$1" = "deps" ]]; then
     cmake --build . --config $CONFIG --parallel) && \
     cmake --install $GLFW_SRC/build --prefix $GLFW_PATH --config $CONFIG"
 
-  (eval $BUILD_FILAMENT && eval $BUILD_GLFW)
+  (eval $BUILD_FILAMENT) && (eval $BUILD_GLFW)
+  exit 0
 
 #-------------------------------------------------------------------------------
 # Builds resources (e.g. materials)
 #-------------------------------------------------------------------------------
 elif [[ "$1" = "resources" ]]; then
-  # The -a option may be overkill for your platform.
+  # Copy environments to the output folder. These aren't compiled as resources
+  # but are loaded at runtime. Then, build all materials and bundle them, as
+  # well as fonts for the demo. The -a option may be overkill for your platform.
+  mkdir -p $OUT/environments && cp -r demo/environments $OUT/environments && \
   $FILAMENT_BIN/matc -p all -a all -o \
     $OUT/vertex_color.filamat demo/materials/vertex_color.mat && \
   $FILAMENT_BIN/matc -p all -a all -o \
@@ -96,9 +100,7 @@ elif [[ "$1" = "resources" ]]; then
     $OUT/filament_imgui.filamat \
     demo/fonts/Roboto_Regular.ttf \
     demo/fonts/Inconsolata_Regular.ttf
-  # Copy environments to the output folder. These aren't compiled as resources
-  # but are loaded at runtime.
-  cp -r demo/environments $OUT/
+  exit 0
 
 #-------------------------------------------------------------------------------
 # Builds the demo.
@@ -146,6 +148,7 @@ elif [[ "$1" = "demo" ]]; then
 
   # Build the app.
   $CC $OPTS $INCLUDES $SRCS -o build/demo $LIBS
+  exit 0
 
 else
   echo "unknown command: $1"
